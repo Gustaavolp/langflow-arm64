@@ -37,5 +37,5 @@ jobs:
           push: true
           file: ./langflow-repo/docker/build_and_push.Dockerfile
           tags: |
-            langflowai/langflow:${{ github.sha }}
-            langflowai/langflow:latest
+            gustaavolp/langflow:${{ github.sha }}
+            gustaavolp/langflow:latest
