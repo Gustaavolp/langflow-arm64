@@ -13,11 +13,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Clone external repository
+      - name: Clone langflow repository
         run: |
-          git clone https://<your-github-token>@github.com/username/external-repo.git external-repo
-        env:
-          your-github-token: ${{ secrets.EXTERNAL_REPO_TOKEN }}
+          git clone https://github.com/langflow-ai/langflow.git langflow-repo
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -34,10 +32,10 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./external-repo
+          context: ./langflow-repo
           platforms: linux/amd64,linux/arm64
           push: true
-          file: ./external-repo/docker/build_and_push.Dockerfile
+          file: ./langflow-repo/docker/build_and_push.Dockerfile
           tags: |
             langflowai/langflow:${{ github.sha }}
             langflowai/langflow:latest
